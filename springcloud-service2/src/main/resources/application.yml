@@ -1,0 +1,35 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8766
+spring:
+  application:
+    name: service-rpc2
+  zipkin:
+    base-url: http://localhost:9211
+feign:
+  hystrix:
+    enabled: true
+    config:
+      stream:
+        maxConcurrentConnections: 50
+    command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+#    command:
+#      default:
+#        execution:
+#          isolation:
+#            strategy: SEMAPHORE
+management:
+  security:
+    enabled: false
+logging:
+  file: D:\logback\${spring.application.name}-${server.port}.log

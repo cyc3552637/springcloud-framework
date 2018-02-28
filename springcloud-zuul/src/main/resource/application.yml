@@ -1,0 +1,77 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8769
+spring:
+  application:
+    name: service-zuul
+  zipkin:
+    base-url: http://localhost:9211
+zuul:
+  max:
+    host:
+      connections: 500
+  host:
+    socket-timeout-millis: 6000
+    connect-timeout-millis: 6000
+  routes:
+    servic-rpc-a:
+      path: /service-rpc-a/**
+      serviceId: service-rpc1
+      sensitiveHeaders:
+    servic-rpc-b:
+      path: /service-rpc-b/**
+      serviceId: service-rpc2
+      sensitiveHeaders:
+  ribbonIsolationStrategy: THREAD
+  threadPool:
+    useSeparateThreadPools: true
+#  ribbon:
+#    eager-load:
+#      enabled: true
+#    restclient:
+#      enabled: true
+#    okhttp:
+#      enabled: true
+hystrix:
+  enabled: true
+  config:
+    stream:
+      maxConcurrentConnections: 50
+  command:
+    default:
+      execution:
+        strategy: THREAD
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+service-rpc1:
+  ribbon: 
+    ReadTimeout: 1000
+    ConnectTimeout: 1000
+    MaxAutoRetries: 0
+    MaxAutoRetriesNextServer: 1
+service-rpc2:
+  ribbon: 
+    ReadTimeout: 1000 
+    ConnectTimeout: 1000
+    MaxAutoRetries: 0
+    MaxAutoRetriesNextServer: 1
+#ribbon:    
+#  ConnectTimeout: 6000
+#  ReadTimeout: 6000
+#  MaxAutoRetries: 0
+#  MaxAutoRetriesNextServer: 1
+#  okToRetryOnAllOperations: true
+#  okhtftp:
+#    enabled: true
+management:
+  security:
+    enabled: false
+logging:
+  file: D:\logback\${spring.application.name}-${server.port}.log
+    
