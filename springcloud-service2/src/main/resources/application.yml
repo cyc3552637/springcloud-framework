@@ -9,6 +9,9 @@ spring:
     name: service-rpc2
   zipkin:
     base-url: http://localhost:9211
+  sleuth:
+    sampler:
+      percentage: 1.0
 feign:
   hystrix:
     enabled: true

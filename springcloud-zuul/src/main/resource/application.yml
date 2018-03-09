@@ -9,6 +9,9 @@ spring:
     name: service-zuul
   zipkin:
     base-url: http://localhost:9211
+  sleuth:
+    sampler:
+      percentage: 1.0
 zuul:
   max:
     host:

@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,9 @@ import com.netflix.zuul.context.RequestContext;
 public class MyFilter extends ZuulFilter{
 
     private static Logger log = LoggerFactory.getLogger(MyFilter.class);
+    
+    @Autowired
+    Tracer tracer;
     @Override
     public String filterType() {
         return "pre";
