@@ -1,9 +1,9 @@
 package com.digital.entity;
 
 public class UserEntity {
-	private String userid;
-	private String user;
-	private String password;
+	public String userid;
+	public String user;
+	public String password;
 	public String getUserid() {
 		return userid;
 	}

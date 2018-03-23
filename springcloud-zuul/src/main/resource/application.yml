@@ -4,6 +4,9 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 server:
   port: 8769
+  tomcat: 
+    max-threads: 128
+    min-spare-threads: 64
 spring:
   application:
     name: service-zuul
@@ -17,8 +20,10 @@ zuul:
     host:
       connections: 500
   host:
-    socket-timeout-millis: 6000
-    connect-timeout-millis: 6000
+#    socket-timeout-millis: 6000
+#    connect-timeout-millis: 6000
+    maxTotalConnections: 200
+    maxPerRouteConnections: 10
   routes:
     servic-rpc-a:
       path: /service-rpc-a/**
@@ -31,13 +36,6 @@ zuul:
   ribbonIsolationStrategy: THREAD
   threadPool:
     useSeparateThreadPools: true
-#  ribbon:
-#    eager-load:
-#      enabled: true
-#    restclient:
-#      enabled: true
-#    okhttp:
-#      enabled: true
 hystrix:
   enabled: true
   config:
@@ -46,32 +44,28 @@ hystrix:
   command:
     default:
       execution:
-        strategy: THREAD
+        strategy: THREAD          # SEMAPHORE/THREAD
         timeout:
           enabled: true
         isolation:
           thread:
-            timeoutInMilliseconds: 3000
+            timeoutInMilliseconds: 2000
 service-rpc1:
   ribbon: 
     ReadTimeout: 1000
-    ConnectTimeout: 1000
-    MaxAutoRetries: 0
-    MaxAutoRetriesNextServer: 1
+    ConnectTimeout: 500
+    eager-load:
+      enabled: true
+#    MaxAutoRetries: 0
+#    MaxAutoRetriesNextServer: 1
 service-rpc2:
   ribbon: 
     ReadTimeout: 1000 
-    ConnectTimeout: 1000
-    MaxAutoRetries: 0
-    MaxAutoRetriesNextServer: 1
-#ribbon:    
-#  ConnectTimeout: 6000
-#  ReadTimeout: 6000
-#  MaxAutoRetries: 0
-#  MaxAutoRetriesNextServer: 1
-#  okToRetryOnAllOperations: true
-#  okhtftp:
-#    enabled: true
+    ConnectTimeout: 500
+    eager-load:
+      enabled: true
+#    MaxAutoRetries: 0
+#    MaxAutoRetriesNextServer: 1
 management:
   security:
     enabled: false

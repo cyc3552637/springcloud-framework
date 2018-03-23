@@ -15,9 +15,5 @@ public class ServiceZuulApplication {
     public static void main(String[] args) {
         SpringApplication.run(ServiceZuulApplication.class, args);
     }
-//    @Bean
-//    public AlwaysSampler defaultSampler(){
-//        return new AlwaysSampler();
-//    }
-//    
+
 }

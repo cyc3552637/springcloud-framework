@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.cache.annotation.Cacheable;
 
 /**
  * Created by mj on 2017/7/17.
@@ -18,6 +19,7 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface UserDao {
     @Select("select user from userTest where user=#{user}")
+    @Cacheable(value ="result")
     List<UserEntity> query(@Param("user")String user);
     
    
