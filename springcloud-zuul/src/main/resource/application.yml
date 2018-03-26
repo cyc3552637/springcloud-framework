@@ -23,19 +23,26 @@ zuul:
 #    socket-timeout-millis: 6000
 #    connect-timeout-millis: 6000
     maxTotalConnections: 200
-    maxPerRouteConnections: 10
+    maxPerRouteConnections: 20
   routes:
     servic-rpc-a:
       path: /service-rpc-a/**
       serviceId: service-rpc1
-      sensitiveHeaders:
+      sensitiveHeaders: 
     servic-rpc-b:
       path: /service-rpc-b/**
       serviceId: service-rpc2
-      sensitiveHeaders:
+      sensitiveHeaders: 
   ribbonIsolationStrategy: THREAD
   threadPool:
     useSeparateThreadPools: true
+  ribbon: 
+    httpclient:
+      enabled: false
+    okhttp:
+      enabled: true
+    eager-load:
+      enabled: true
 hystrix:
   enabled: true
   config:
@@ -54,18 +61,27 @@ service-rpc1:
   ribbon: 
     ReadTimeout: 1000
     ConnectTimeout: 500
-    eager-load:
-      enabled: true
+#    eager-load:
+#      enabled: true
+#    httpclient:
+#      enabled: false
+#    okhttp:
+#      enabled: true
 #    MaxAutoRetries: 0
 #    MaxAutoRetriesNextServer: 1
 service-rpc2:
   ribbon: 
     ReadTimeout: 1000 
     ConnectTimeout: 500
-    eager-load:
-      enabled: true
+#    eager-load:
+#      enabled: true
+#    httpclient:
+#      enabled: false
+#    okhttp:
+#      enabled: true
 #    MaxAutoRetries: 0
 #    MaxAutoRetriesNextServer: 1
+
 management:
   security:
     enabled: false

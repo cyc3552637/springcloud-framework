@@ -16,6 +16,6 @@ import com.digital.service.RpcServerServiceError;
 
 @FeignClient(value = "service-rpc1",fallback = RpcServerServiceError.class) //调用注册的rpc-client服务
 public interface RpcServerService {
-    @RequestMapping(value = "/useraction",method = RequestMethod.GET)
+    @RequestMapping(value = "/useraction",method = RequestMethod.POST)
     public String userAction(@RequestParam("name") String name,@RequestBody(required=false) UserEntity ue);//调方法的参数
 }

@@ -37,6 +37,10 @@ spring:
     filters: stat,wall,slf4j
     logSlowSql: true
 feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
   hystrix:
     enabled: true
     config:
