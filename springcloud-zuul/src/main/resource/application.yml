@@ -1,5 +1,8 @@
 eureka:
   client:
+    instance:
+      leaseRenewalIntervalInSeconds: 10
+    registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 server:
@@ -14,14 +17,12 @@ spring:
     base-url: http://localhost:9211
   sleuth:
     sampler:
-      percentage: 1.0
+      percentage: 0.1
 zuul:
   max:
     host:
       connections: 500
   host:
-#    socket-timeout-millis: 6000
-#    connect-timeout-millis: 6000
     maxTotalConnections: 200
     maxPerRouteConnections: 20
   routes:
@@ -33,18 +34,19 @@ zuul:
       path: /service-rpc-b/**
       serviceId: service-rpc2
       sensitiveHeaders: 
-  ribbonIsolationStrategy: THREAD
+  ribbonIsolationStrategy: THREAD     
   threadPool:
     useSeparateThreadPools: true
-  ribbon: 
-    httpclient:
-      enabled: false
-    okhttp:
-      enabled: true
-    eager-load:
-      enabled: true
+ribbon:
+  okhttp:
+    enabled: true
+  httpclient:
+    max-connections: 200 # 默认值
+    max-connections-per-route: 50 # 默认值
+  eager-load:
+    enabled: true
 hystrix:
-  enabled: true
+  enabled: false
   config:
     stream:
       maxConcurrentConnections: 50
@@ -61,26 +63,14 @@ service-rpc1:
   ribbon: 
     ReadTimeout: 1000
     ConnectTimeout: 500
-#    eager-load:
-#      enabled: true
-#    httpclient:
-#      enabled: false
-#    okhttp:
-#      enabled: true
-#    MaxAutoRetries: 0
-#    MaxAutoRetriesNextServer: 1
+    MaxAutoRetries: 0
+    MaxAutoRetriesNextServer: 1
 service-rpc2:
-  ribbon: 
+  ribbon:
     ReadTimeout: 1000 
     ConnectTimeout: 500
-#    eager-load:
-#      enabled: true
-#    httpclient:
-#      enabled: false
-#    okhttp:
-#      enabled: true
-#    MaxAutoRetries: 0
-#    MaxAutoRetriesNextServer: 1
+    MaxAutoRetries: 0
+    MaxAutoRetriesNextServer: 1
 
 management:
   security:

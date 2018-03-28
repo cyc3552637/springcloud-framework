@@ -9,7 +9,7 @@ spring:
     base-url: http://localhost:9211
   sleuth:
     sampler:
-      percentage: 1.0
+      percentage: 0.1
   application:
     name: service-rpc1
   redis:
