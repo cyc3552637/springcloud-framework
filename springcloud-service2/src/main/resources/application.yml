@@ -35,7 +35,7 @@ hystrix:
       execution:
         isolation:
           thread: 
-            timeoutInMilliseconds: 1000
+            timeoutInMilliseconds: 2000
           strategy: THREAD            # SEMAPHORE/THREAD
 management:
   security:

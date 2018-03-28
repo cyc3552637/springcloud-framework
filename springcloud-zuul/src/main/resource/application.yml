@@ -58,17 +58,17 @@ hystrix:
           enabled: true
         isolation:
           thread:
-            timeoutInMilliseconds: 2000
+            timeoutInMilliseconds: 6000
 service-rpc1:
   ribbon: 
-    ReadTimeout: 1000
-    ConnectTimeout: 500
+    ReadTimeout: 3000
+    ConnectTimeout: 3000
     MaxAutoRetries: 0
     MaxAutoRetriesNextServer: 1
 service-rpc2:
   ribbon:
-    ReadTimeout: 1000 
-    ConnectTimeout: 500
+    ReadTimeout: 3000 
+    ConnectTimeout: 3000
     MaxAutoRetries: 0
     MaxAutoRetriesNextServer: 1
 
