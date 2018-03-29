@@ -24,7 +24,6 @@ public class RpcServerController {
     RpcServerService rpcserverservice;
     @RequestMapping(value = "/useractiondo")
     public String userActiondo(HttpServletRequest request){             //拦截用户发送的/useraction请求
-    	long start = System.currentTimeMillis();
     	UserEntity ue=new UserEntity();
     	ue.setUserid("111");
     	ue.setUser("aaa");
@@ -32,8 +31,6 @@ public class RpcServerController {
     	HttpSession session = request.getSession();  
         String name=session.getAttribute("name").toString();
         String result=rpcserverservice.userAction(name,ue);
-        long end = System.currentTimeMillis();
-        System.out.println("forJava: " + (end - start));
     	return result;
     }
   
