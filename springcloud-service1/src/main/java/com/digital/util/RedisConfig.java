@@ -26,12 +26,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport{
 
-    @Value("${spring.redis.host}")
-    private String host;
-    @Value("${spring.redis.port}")
-    private int port;
-    @Value("${spring.redis.timeout}")
-    private int timeout;
+//    @Value("${spring.redis.host}")
+//    private String host;
+//    @Value("${spring.redis.port}")
+//    private int port;
+//    @Value("${spring.redis.timeout}")
+//    private int timeout;
+//    链接哨兵、cluster的时候都可以把这个去掉，没有起什么作用，@Configuration就直接用yml了
     
     //自定义缓存key生成策略
     @Bean
